@@ -1,6 +1,6 @@
 import abc
 
-class cache(metaclass=abc.ABCMeta):
+class Cache(metaclass=abc.ABCMeta):
     """
     This is an abstract class for implmenting a key value cache
     """

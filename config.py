@@ -1,3 +1,4 @@
+import os
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -14,17 +15,18 @@ class Config(object):
 
     # Secret key for signing cookies
     SECRET_KEY = "secret"
-    DATABASE_DRIVER = 'dict_cache'
+    DATABASE_DRIVER = 'filesystem'
 
 class ProductionConfig(Config):
-    DATABASE_DRIVER = 'redis_cache'
+    DATABASE_DRIVER = 'redis'
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    DATABASE_DRIVER = 'dict_cache'
+    DATABASE_DRIVER = 'memory'
 
 class TestingConfig(Config):
     TESTING = True
+    DATABASE_DRIVER = 'memory'
 
 
 app_config = {
