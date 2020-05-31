@@ -16,7 +16,7 @@ def test_get_all(client):
 
 def test_get_by_resource(client):
     response = client.get("/endpoint/resource")
-    assert response.status_code == 404
+    assert response.status_code == 200
 
 def test_post(client):
     response = client.post("/endpoint/resource")
