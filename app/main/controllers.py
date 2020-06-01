@@ -1,6 +1,8 @@
 from flask import Blueprint
+from flask import current_app, g
 
 def get_resource():
+	print("The current app is {} and the DB engine driver is {} ".format(current_app, current_app.config["DATABASE_DRIVER_OBJECT"]))
 	return "All Items", 200
 
 def post_resource(new_resource):

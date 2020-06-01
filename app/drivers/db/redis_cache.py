@@ -5,9 +5,10 @@ class RedisCacheBuilder:
     def __init__(self):
         self._instance = None
 
-    def __call__(self, host = "localhost", port=6379, db=0,  prefix = "", expiration_time=3600):
+    #this method makes this class a singleton as only one instance is returned given the same arguments
+    def __call__(self, host = "localhost", port=6379, db=0,  prefix = "", expiration_time=3600, **_ignored):
         if not self._instance:
-            self._instance = RedisCache(host, port, db, prefix)
+            self._instance = RedisCache(host, port, db, prefix, expiration_time)
         return self._instance
 
 

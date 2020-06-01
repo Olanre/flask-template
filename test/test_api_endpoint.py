@@ -2,14 +2,6 @@
 import pytest
 from flask import Response
 
-from app import create_app
-from app.drivers.db import factory as db_factory
-
-@pytest.fixture
-def app():
-    app = create_app('testing','test_app' )
-    return app
-
 def test_get_all(client):
     response = client.get("/endpoint/")
     assert response.status_code == 200

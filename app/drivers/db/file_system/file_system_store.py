@@ -12,10 +12,12 @@ class FileSystemBuilder:
     def __init__(self):
         self._instance = None
 
-    def __call__(self, partitions, service_root):
+    #this method makes this class a singleton as only one instance is returned given the same arguments
+    def __call__(self, partitions, service_root, expiration_time, **_ignored):
         if not self._instance:
-            self._instance = FileSystemStore(partitions, service_root)
+            self._instance = FileSystemStore(partitions, service_root, expiration_time)
         return self._instance
+
 
 class FileSystemStore(Cache):
 

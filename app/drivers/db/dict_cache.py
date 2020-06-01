@@ -6,9 +6,11 @@ class DictCacheBuilder:
     def __init__(self):
         self._instance = None
 
-    def __call__(self, expiration_time):
+    #this method makes this class a singleton as only one instance is returned given the same arguments
+    #only use the argument we need, ignore all others
+    def __call__(self, expiration_time, **_ignored):
         if not self._instance:
-            self._instance = DictCache(expiration_time)
+            self._instance = DictCache(expiration_time,)
         return self._instance
 
 class DictCache(Cache):
