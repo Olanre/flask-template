@@ -11,3 +11,4 @@ celery
 pytest-mock
 flask-mail
 rq
+requests

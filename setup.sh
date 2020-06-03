@@ -5,7 +5,7 @@ nohup /Users/olanre/Documents/SHOP/redis-stable/src/redis-server & ;
 
 #setup virtual environment
 virtualenv env
-source env/bin/activate
+#source env/bin/activate
 #install all dependancies
 pip install -r requirements.txt
 
