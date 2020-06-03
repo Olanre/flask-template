@@ -1,8 +1,8 @@
 import abc
 
-class Cache(metaclass=abc.ABCMeta):
+class Store(metaclass=abc.ABCMeta):
     """
-    This is an abstract class for implmenting a key value cache
+    This is an abstract class for implmenting a key value store
     """
     @classmethod
     def __subclasshook__(cls, subclass):
@@ -18,16 +18,16 @@ class Cache(metaclass=abc.ABCMeta):
                 callable(subclass.get_all))
 
     @abc.abstractmethod
-    def put(self, key, value):
+    def put(self, id, data):
         raise NotImplemented
 
 
     @abc.abstractmethod
-    def get(self, key):
+    def get(self, id):
         raise NotImplemented
 
     @abc.abstractmethod
-    def remove(self, key):
+    def remove(self, id):
         raise NotImplemented
 
     @abc.abstractmethod

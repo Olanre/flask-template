@@ -16,7 +16,7 @@ def test_post(client):
 
 
 def test_delete(client):
-    response = client.delete("/url/resource")
+    response = client.delete("/endpoint/resource")
     assert response.status_code == 202
 
 

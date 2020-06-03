@@ -8,19 +8,19 @@ class abstractMetadataService(metaclass=abc.ABCMeta):
     """
     @classmethod
     def __subclasshook__(cls, subclass):
-        return (hasattr(subclass, 'get_entry') and 
-                callable(subclass.get_entry) and 
-                hasattr(subclass, 'create_partition') and 
-                callable(subclass.create_partition) and
+        return (hasattr(subclass, 'get_node') and 
+                callable(subclass.get_node) and 
+                hasattr(subclass, 'create_node') and 
+                callable(subclass.create_node) and
                 hasattr(subclass, 'get_all_metadata') and 
                 callable(subclass.get_all_metadata))
 
     @abc.abstractmethod
-    def get_entry(self, key):
+    def get_node(self, key):
         raise NotImplemented
 
     @abc.abstractmethod
-    def create_partition(self, value):
+    def create_node(self, value):
         raise NotImplemented
 
     @abc.abstractmethod

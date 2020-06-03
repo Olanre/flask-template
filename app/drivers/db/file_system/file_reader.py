@@ -1,24 +1,21 @@
 import os
 import platform
-from app.drivers.db.file_system.abstract_file_reader import abstractFileReader
+from logger import log
 
+class FileReader:
 
-class FileReader(abstractFileReader):
-
-    def __init__(self, filename):
-        self._filename = filename
-
-    def read_file(self):
+    def read_file(self, filename):
         try:
-            f = open(self._filename, "r")
+            f = open(filename, "r")
             contents = f.read()
             f.close
-            return contents, self.creation_date()
+            log.debug(f"Contents of file {filename} successfully read from persistent disk")
+            return contents
         except:
-            print("Unable to read file {}".format(self._filename))
+            log.error(f"Unable to read file {filename}")
             return None
 
-    def creation_date(self):
+    def creation_date(self, filename):
         """
         Try to get the date that a file was created, falling back to when it was
         last modified if that isn't possible.
@@ -26,22 +23,24 @@ class FileReader(abstractFileReader):
         See http://stackoverflow.com/a/39501288/1709587 for explanation.
         """
         if platform.system() == 'Windows':
-            return os.path.getctime(self._filename)
+            return os.path.getctime(filename)
         else:
-            stat = os.stat(self._filename)
+            stat = os.stat(filename)
             try:
                 return stat.st_birthtime
             except AttributeError:
                 # We're probably on Linux. No easy way to get creation dates here,
                 # so we'll settle for when its content was last modified.
+                log.error(f"Unable to find the creation file for the file {filename}, falling back to last modified time")
                 return stat.st_mtime
 
-    def is_substring_in_file(self, substring):
+    def is_substring_in_file(self, filename, substring):
         try:
-            f = open(self._filename, "r")
+            f = open(filename, "r")
             contents = f.read()
             f.close
-            return substring in contents
+            found =  substring in contents
+            log.debug(f"The substring {substring} was found in file {filename}")
         except:
-            print("Unable to read file {}".format(self._filename))
+            log.error(f"Unable to read file {filename}")
             return None

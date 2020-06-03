@@ -2,7 +2,7 @@ import abc
 
 class BaseEncoder(metaclass=abc.ABCMeta):
     """
-    This is an abstract class for implmenting a key value cache
+    This is an abstract class for implmenting a simple encoder/decoder serializer
     """
     @classmethod
     def __subclasshook__(cls, subclass):

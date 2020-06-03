@@ -2,7 +2,7 @@ import abc
 
 class AbstractObserver(metaclass=abc.ABCMeta):
     """
-    This is an abstract class for implmenting a key value cache
+    This is an abstract class for implmenting an abstract observer
     """
     @classmethod
     def __subclasshook__(cls, subclass):

@@ -1,20 +1,20 @@
 __author__ = "Olanre Okunlola"
 
+from logger import log
 from flask import Flask
-
 from app.main import main_blueprint
-from config import app_config
+from config import app_config, logging_config
 from app.drivers.db import factory as db_factory
 import os
 from celery import Celery
+from app.jobs.celery_tasks import *
 
 def register_blueprints(application):
 	application.register_blueprint(main_blueprint, url_prefix='/')
 	
-def create_celery(application, name):
-	mycelery = Celery(name)
-	mycelery.conf.update(application.config)
-	return mycelery
+def create_celery_tasks(application):
+	#schedule some tasks to be kicked off
+	pass
 
 def init_database(application):
 	config = {"expiration_time" :100, 
@@ -22,8 +22,6 @@ def init_database(application):
 			"port":6379,
 			"db" :0,  
 			"prefix" : "",
-			"partitions": 10, 
-			"service_root" : os.getcwd()
 	}
 	db_instance = db_factory.create(application.config["DATABASE_DRIVER"], **config)
 	if "DATABASE_DRIVER_OBJECT"  not in application.config:
@@ -43,16 +41,6 @@ def create_app(config_name, name, db = None):
 	else:
 		application.config['DATABASE_DRIVER_OBJECT'] = db
 	#create_jobs
-	#create_celery(application, name)
+	#create_celery_tasks(application, name)
 	return application
 
-"""
-Some Testing
-
-app = create_app('development', 'development-app')
-db_instance1 = app.config['DATABASE_DRIVER_OBJECT']
-db_instance2 = app.config['DATABASE_DRIVER_OBJECT']
-print("Is db1 equal to db2 returns {}".format(db_instance1 == db_instance2 ))
-db_instance1.put("hello","world")
-print(db_instance1.get_all())
-"""
