@@ -1,5 +1,5 @@
 from celery import Celery
-
+import requests
 #uses rabbitmq be default
 # Create the app and set the broker location (RabbitMQ)
 app = Celery('app',
@@ -16,3 +16,7 @@ def add(a, b):
 @app.task
 def subtract(a, b):
     return a - b
+
+@app.task
+def callAPI(url):
+    response = requests.get(url)

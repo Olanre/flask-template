@@ -64,6 +64,7 @@ class FileSystemStore(Store):
         log.debug(f"Cluster location  where the  item: {id} can be found is: {partition}")
         if not partition:
             return None
+            
         filename = self._service_root + partition + id
         log.debug(f"Get is using the filename: {filename} to lookup the value for key: {id}")
         rd = FileReader()

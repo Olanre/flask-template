@@ -1,7 +1,7 @@
 class ObserverError(Exception):
     pass
 
-class BasePublisher(AbstractObserver):
+class BasePublisher(AbstractPublisher):
     def __init__(self):
         self.observers = []
     
@@ -19,4 +19,4 @@ class BasePublisher(AbstractObserver):
     
     def notify(self):
         for observer in observers:
-            observer.notify(self)
+            observer.update(self)
