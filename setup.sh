@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #startup redis
-nohup /Users/olanre/Documents/SHOP/redis-stable/src/redis-server & ;
+nohup /Users/olanre/Documents/SHOP/redis-stable/src/redis-server &
 
 #setup virtual environment
 virtualenv env
